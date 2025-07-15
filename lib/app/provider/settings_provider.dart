@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider extends ChangeNotifier {
+  // App
+  ThemeMode themeMode = ThemeMode.system;
+
+  // Form
   bool savedAlarmEnabled = false;
   bool savedQuietHoursEnabled = false;
   double savedThreshold = 20;
@@ -26,6 +30,9 @@ class SettingsProvider extends ChangeNotifier {
     savedAlarmEnabled = prefs.getBool('alarm_enabled') ?? false;
     savedQuietHoursEnabled = prefs.getBool('quiet_hours_enabled') ?? false;
     savedThreshold = prefs.getDouble('threshold') ?? 20;
+    themeMode = ThemeMode.values.byName(
+      prefs.getString('theme_mode') ?? 'system',
+    );
 
     final startString = prefs.getString('start')?.split(',');
     if (startString != null) {
@@ -72,6 +79,22 @@ class SettingsProvider extends ChangeNotifier {
 
   void updateEnd(TimeOfDay value) {
     end = value;
+    notifyListeners();
+  }
+
+  void updateTheme() {
+    switch (themeMode) {
+      case ThemeMode.light:
+        themeMode = ThemeMode.dark;
+      case ThemeMode.dark:
+        themeMode = ThemeMode.system;
+      case ThemeMode.system:
+        themeMode = ThemeMode.light;
+    }
+    SharedPreferences.getInstance().then((value) {
+      value.setString('theme_mode', themeMode.name);
+    });
+
     notifyListeners();
   }
 

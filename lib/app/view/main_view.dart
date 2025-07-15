@@ -17,6 +17,12 @@ class _MainViewState extends State<MainView> {
   final double _minValue = 10;
   final double _maxValue = 99;
 
+  final _themeModeIconsMap = {
+    ThemeMode.light: Icons.sunny,
+    ThemeMode.dark: Icons.nightlight_round,
+    ThemeMode.system: Icons.auto_mode,
+  };
+
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
@@ -32,14 +38,13 @@ class _MainViewState extends State<MainView> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: _changeTheme,
-            tooltip: 'Alterar Tema',
-            icon: Icon(
-              themeModeNotifier.value == ThemeMode.light
-                  ? Icons.sunny
-                  : Icons.nightlight_round,
-            ),
+          Consumer<SettingsProvider>(
+            builder:
+                (context, value, child) => IconButton(
+                  onPressed: _changeTheme,
+                  tooltip: 'Alterar Tema',
+                  icon: Icon(_themeModeIconsMap[value.themeMode]),
+                ),
           ),
         ],
       ),
@@ -222,10 +227,10 @@ class _MainViewState extends State<MainView> {
   }
 
   void _changeTheme() {
-    SystemSound.play(SystemSoundType.click);
-    themeModeNotifier.value =
-        themeModeNotifier.value == ThemeMode.light
-            ? ThemeMode.dark
-            : ThemeMode.light;
+    final settingsProvider = Provider.of<SettingsProvider>(
+      context,
+      listen: false,
+    );
+    settingsProvider.updateTheme();
   }
 }

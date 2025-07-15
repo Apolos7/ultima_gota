@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-final themeModeNotifier = ValueNotifier(ThemeMode.system);
-
 ThemeData lightBatteryAlertTheme() {
   const primary = Color(0xFF22C55E);
   const accent = Color(0xFF3B82F6);

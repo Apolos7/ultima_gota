@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ultima_gota/app/core/battery_receiver.dart';
 
 class SettingsProvider extends ChangeNotifier {
   // App
@@ -101,10 +102,16 @@ class SettingsProvider extends ChangeNotifier {
   Future<void> save() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('alarm_enabled', alarmEnabled);
-    await prefs.setBool('quiet_hours_enabled', alarmEnabled);
+    await prefs.setBool('quiet_hours_enabled', quietHoursEnabled);
     await prefs.setDouble('threshold', threshold);
     await prefs.setString('start', '${start.hour},${start.minute}');
     await prefs.setString('end', '${end.hour},${end.minute}');
+
+    if (alarmEnabled) {
+      BatteryReceiver.startBatteryReceiver(threshold.toInt());
+    } else {
+      BatteryReceiver.stopBatteryReceiver();
+    }
 
     savedAlarmEnabled = alarmEnabled;
     savedQuietHoursEnabled = quietHoursEnabled;

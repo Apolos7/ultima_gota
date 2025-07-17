@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:ultima_gota/app/components/battery_alert_theme.dart';
 import 'package:ultima_gota/app/components/custom_time_picker.dart';
 import 'package:ultima_gota/app/provider/settings_provider.dart';
 
@@ -29,7 +28,17 @@ class _MainViewState extends State<MainView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Última Gota'),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              'assets/battery_icon_without_background.png',
+              width: 50,
+            ),
+            const Gap(10),
+            const Text('Última Gota'),
+          ],
+        ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
           child: Container(
@@ -209,7 +218,7 @@ class _MainViewState extends State<MainView> {
               builder:
                   (context, value, child) => ElevatedButton(
                     onPressed: value.isDirty ? _save : null,
-                    child: const Text('Salvar'),
+                    child: Text('Salvar', style: themeData.textTheme.bodyLarge),
                   ),
             ),
           ],
@@ -218,12 +227,55 @@ class _MainViewState extends State<MainView> {
     );
   }
 
-  void _save() {
+  void _save() async {
     final settingsProvider = Provider.of<SettingsProvider>(
       context,
       listen: false,
     );
-    settingsProvider.save();
+    final isGranted = await Permission.notification.isGranted;
+
+    if (!isGranted) {
+      final permissionStatus = await Permission.notification.request();
+      if (permissionStatus == PermissionStatus.granted) {
+        settingsProvider.save();
+      } else {
+        if (!mounted) return;
+        showDialog(
+          context: context,
+          builder:
+              (context) => Center(
+                child: Card(
+                  margin: const EdgeInsets.all(24),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 20,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'É necessário permitir o acesso ao envio de notificações para que possamos te ajudar.',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        const Gap(20),
+                        ElevatedButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text(
+                            'OK',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+        );
+      }
+    } else {
+      settingsProvider.save();
+    }
   }
 
   void _changeTheme() {

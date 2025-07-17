@@ -27,9 +27,9 @@ Aplicativo Flutter para Android que monitora o nível da bateria do dispositivo 
 
 ## 📸 Capturas de Tela *(opcional)*
 
-| A Única Tela                         |
-|--------------------------------------|
-| ![screenshot](assets/screenshot.png) |
+| A Única Tela                                |
+|---------------------------------------------|
+| ![screenshot](assets/readme/screenshot.png) |
 
 ---
 

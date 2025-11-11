@@ -4,7 +4,7 @@ Aplicativo Flutter para Android que monitora o nível da bateria do dispositivo 
 
 ---
 
-## 📱 Visão Geral
+## Visão Geral
 
 **Última Gota** é uma aplicação simples e desenvolvida com Flutter. O objetivo é permitir que o usuário configure alertas de bateria de forma personalizada, incluindo:
 
@@ -15,25 +15,25 @@ Aplicativo Flutter para Android que monitora o nível da bateria do dispositivo 
 
 ---
 
-## 🎯 Funcionalidades
+## Funcionalidades
 
-- ✅ Alerta de bateria abaixo de um limite configurável
-- ✅ Interruptor para ativar/desativar o alarme
-- ✅ Seleção de faixa horária para silenciar os alertas
-- ✅ Temas claro/escuro com alternância dinâmica
-- ✅ Interface limpa
+- Alerta de bateria abaixo de um limite configurável
+- Interruptor para ativar/desativar o alarme
+- Seleção de faixa horária para silenciar os alertas
+- Temas claro/escuro com alternância dinâmica
+- Interface limpa
 
 ---
 
-## 📸 Capturas de Tela *(opcional)*
+## Captura de Tela
 
-| A Única Tela                                |
+| A Única Tela que você precisa               |
 |---------------------------------------------|
 | ![screenshot](assets/readme/screenshot.png) |
 
 ---
 
-## 🚀 Como Rodar o Projeto
+## Como Rodar o Projeto
 
 ### Pré-requisitos
 
@@ -50,40 +50,21 @@ flutter pub get
 flutter run
 ```
 
-> 💡 Dica: para Android, verifique se o emulador está em execução ou o dispositivo conectado.
-
 ---
 
-## 🛠️ Tecnologias Usadas
-
-- [Flutter](https://flutter.dev/)
-- [Provider](https://pub.dev/packages/provider) — gerenciamento de estado
-- [Workmanager](https://pub.dev/packages/workmanager) — Execução de código em Background
-- [Shared Preferences](https://pub.dev/packages/shared_preferences) — persistência local
-
----
-
-## 👨‍💻 Contribuindo
+## Contribuindo
 
 Contribuições são muito bem-vindas! Sinta-se à vontade para abrir **Issues**, sugerir melhorias ou enviar um **Pull Request**.
 
-### Para contribuir:
-
-1. Fork este repositório
-2. Crie sua branch: `git checkout -b feature/sua-feature`
-3. Commit suas alterações: `git commit -m 'feat: sua alteração'`
-4. Push para a branch: `git push origin feature/sua-feature`
-5. Abra um Pull Request 🚀
-
 ---
 
-## 📝 Licença
+## Licença
 
 Este projeto está licenciado sob a **[MIT License](LICENSE)** — sinta-se livre para usá-lo e modificá-lo.
 
 ---
 
-## 📌 Informações adicionais
+## Informações adicionais
 
 - **Email para contato:** [alessandro_SSantana@outlook.com]
 - **Versão atual:** `v--.--.--`

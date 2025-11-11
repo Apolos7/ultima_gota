@@ -1,0 +1,16 @@
+{
+  "@@locale": "en",
+  "appTitle": "Last Drop",
+  "alertMeWhenBatteryIsBelow": "Alert me when battery is below:",
+  "batteryAlarm": "Battery Alarm",
+  "batteryThreshold": "Battery Threshold",
+  "changeTheme": "Change Theme",
+  "doNotDisturbBetween": "Do not disturb between:",
+  "enableBatteryNotifications": "Enable battery notifications",
+  "endTime": "End Time",
+  "quietHours": "Quiet Hours",
+  "saveButton": "Save",
+  "startTime": "Start Time",
+  "notificationPermissionRequired": "It is necessary to allow notification access so we can assist you.",
+  "understood": "Understood"
+}

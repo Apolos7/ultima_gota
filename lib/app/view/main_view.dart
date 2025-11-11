@@ -4,6 +4,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:ultima_gota/app/components/custom_time_picker.dart';
 import 'package:ultima_gota/app/provider/settings_provider.dart';
+import 'package:ultima_gota/extensions/theme_extension.dart';
+import 'package:ultima_gota/extensions/translations_extension.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -24,8 +26,6 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    var themeData = Theme.of(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -36,7 +36,7 @@ class _MainViewState extends State<MainView> {
               width: 50,
             ),
             const Gap(10),
-            const Text('Última Gota'),
+            Text(context.translations.appTitle),
           ],
         ),
         bottom: PreferredSize(
@@ -51,7 +51,7 @@ class _MainViewState extends State<MainView> {
             builder:
                 (context, value, child) => IconButton(
                   onPressed: _changeTheme,
-                  tooltip: 'Alterar Tema',
+                  tooltip: context.translations.changeTheme,
                   icon: Icon(_themeModeIconsMap[value.themeMode]),
                 ),
           ),
@@ -70,12 +70,12 @@ class _MainViewState extends State<MainView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Alarme de Bateria',
-                      style: themeData.textTheme.titleLarge,
+                      context.translations.batteryAlarm,
+                      style: context.theme.textTheme.titleLarge,
                     ),
                     Text(
-                      'Ativar Notificações de Bateria',
-                      style: themeData.textTheme.bodyMedium,
+                      context.translations.enableBatteryNotifications,
+                      style: context.theme.textTheme.bodyMedium,
                     ),
                   ],
                 ),
@@ -95,15 +95,15 @@ class _MainViewState extends State<MainView> {
                 const Icon(Icons.battery_3_bar),
                 const Gap(16),
                 Text(
-                  'Limite de Bateria',
-                  style: themeData.textTheme.titleLarge,
+                  context.translations.batteryThreshold,
+                  style: context.theme.textTheme.titleLarge,
                 ),
               ],
             ),
             const Gap(16),
             Text(
-              'Avise-me quando a bateria estiver abaixo de:',
-              style: themeData.textTheme.bodyMedium,
+              context.translations.alertMeWhenBatteryIsBelow,
+              style: context.theme.textTheme.bodyMedium,
             ),
             const Gap(10),
             Card(
@@ -116,20 +116,20 @@ class _MainViewState extends State<MainView> {
                       children: [
                         Text(
                           '${_minValue.toInt()} %',
-                          style: themeData.textTheme.bodyMedium,
+                          style: context.theme.textTheme.bodyMedium,
                         ),
                         Consumer<SettingsProvider>(
                           builder:
                               (context, value, child) => Text(
                                 '${value.threshold.toInt()} %',
-                                style: themeData.textTheme.bodyLarge?.copyWith(
-                                  color: themeData.colorScheme.primary,
+                                style: context.theme.textTheme.bodyLarge?.copyWith(
+                                  color: context.theme.colorScheme.primary,
                                 ),
                               ),
                         ),
                         Text(
                           '${_maxValue.toInt()} %',
-                          style: themeData.textTheme.bodyMedium,
+                          style: context.theme.textTheme.bodyMedium,
                         ),
                       ],
                     ),
@@ -152,8 +152,8 @@ class _MainViewState extends State<MainView> {
                 const Icon(Icons.access_time_filled),
                 const Gap(16),
                 Text(
-                  'Horário de Silêncio',
-                  style: themeData.textTheme.titleLarge,
+                  context.translations.quietHours,
+                  style: context.theme.textTheme.titleLarge,
                 ),
                 const Spacer(),
                 Consumer<SettingsProvider>(
@@ -166,7 +166,7 @@ class _MainViewState extends State<MainView> {
               ],
             ),
             const Gap(16),
-            Text('Não pertube entre:', style: themeData.textTheme.bodyMedium),
+            Text(context.translations.doNotDisturbBetween, style: context.theme.textTheme.bodyMedium),
             const Gap(10),
             Card(
               child: Padding(
@@ -175,8 +175,8 @@ class _MainViewState extends State<MainView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hora de Início',
-                      style: themeData.textTheme.bodyMedium,
+                      context.translations.startTime,
+                      style: context.theme.textTheme.bodyMedium,
                     ),
                     const Gap(10),
                     Consumer<SettingsProvider>(
@@ -198,8 +198,8 @@ class _MainViewState extends State<MainView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hora de Término',
-                      style: themeData.textTheme.bodyMedium,
+                      context.translations.endTime,
+                      style: context.theme.textTheme.bodyMedium,
                     ),
                     const Gap(10),
                     Consumer<SettingsProvider>(
@@ -218,7 +218,7 @@ class _MainViewState extends State<MainView> {
               builder:
                   (context, value, child) => ElevatedButton(
                     onPressed: value.isDirty ? _save : null,
-                    child: Text('Salvar', style: themeData.textTheme.bodyLarge),
+                    child: Text(context.translations.saveButton, style: context.theme.textTheme.bodyLarge),
                   ),
             ),
           ],
@@ -255,15 +255,15 @@ class _MainViewState extends State<MainView> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'É necessário permitir o acesso ao envio de notificações para que possamos te ajudar.',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          context.translations.notificationPermissionRequired,
+                          style: context.theme.textTheme.bodyLarge,
                         ),
                         const Gap(20),
                         ElevatedButton(
                           onPressed: () => Navigator.pop(context),
                           child: Text(
-                            'OK',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            context.translations.understood,
+                            style: context.theme.textTheme.bodyLarge,
                           ),
                         ),
                       ],

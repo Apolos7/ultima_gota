@@ -1,0 +1,5 @@
+arb-dir: lib/l10n
+template-arb-file: intl_pt_BR.arb
+output-localization-file: app_localizations.dart
+extension-import-path: package:ultima_gota/extensions/translations_extension.dart
+extension-name: 'translations'

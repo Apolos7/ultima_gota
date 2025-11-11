@@ -1,0 +1,55 @@
+{
+  "@@locale": "pt_BR",
+  "appTitle": "Última Gota",
+  "@appTitle": {
+    "description": "Título principal do aplicativo"
+  },
+  "alertMeWhenBatteryIsBelow": "Avise-me quando a bateria estiver abaixo de:",
+  "@alertMeWhenBatteryIsBelow": {
+    "description": "Texto que indica a configuração do nível mínimo de bateria para notificação"
+  },
+  "batteryAlarm": "Alarme de Bateria",
+  "@batteryAlarm": {
+    "description": "Título da seção ou funcionalidade relacionada ao alarme de bateria"
+  },
+  "batteryThreshold": "Limite de Bateria",
+  "@batteryThreshold": {
+    "description": "Rótulo da configuração que define o percentual mínimo de bateria"
+  },
+  "changeTheme": "Alterar Tema",
+  "@changeTheme": {
+    "description": "Texto de ação para alterar o tema do aplicativo"
+  },
+  "doNotDisturbBetween": "Não pertube entre:",
+  "@doNotDisturbBetween": {
+    "description": "Rótulo para definir o intervalo de tempo em que notificações não devem ocorrer"
+  },
+  "enableBatteryNotifications": "Ativar Notificações de Bateria",
+  "@enableBatteryNotifications": {
+    "description": "Texto de opção para ativar ou desativar alertas relacionados à bateria"
+  },
+  "endTime": "Hora de Término",
+  "@endTime": {
+    "description": "Campo para selecionar a hora final do intervalo de silêncio"
+  },
+  "quietHours": "Horário de Silêncio",
+  "@quietHours": {
+    "description": "Título da seção onde o usuário configura o modo silencioso por horário"
+  },
+  "saveButton": "Salvar",
+  "@saveButton": {
+    "description": "Texto do botão para salvar configurações"
+  },
+  "startTime": "Hora de Início",
+  "@startTime": {
+    "description": "Campo para selecionar a hora inicial do intervalo de silêncio"
+  },
+  "notificationPermissionRequired": "É necessário permitir o acesso ao envio de notificações para que possamos te ajudar.",
+  "@notificationPermissionRequired": {
+    "description": "Mensagem informando que o app precisa de permissão para enviar notificações"
+  },
+  "understood": "Entendido",
+  "@understood": {
+    "description": "Texto do botão para confirmar e fechar um aviso ou diálogo"
+  }
+}

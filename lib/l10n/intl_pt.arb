@@ -1,0 +1,16 @@
+{
+  "@@locale": "pt",
+  "appTitle": "Última Gota",
+  "alertMeWhenBatteryIsBelow": "Avise-me quando a bateria estiver abaixo de:",
+  "batteryAlarm": "Alarme de Bateria",
+  "batteryThreshold": "Limite de Bateria",
+  "changeTheme": "Alterar Tema",
+  "doNotDisturbBetween": "Não pertube entre:",
+  "enableBatteryNotifications": "Ativar Notificações de Bateria",
+  "endTime": "Hora de Término",
+  "quietHours": "Horário de Silêncio",
+  "saveButton": "Salvar",
+  "startTime": "Hora de Início",
+  "notificationPermissionRequired": "É necessário permitir o acesso ao envio de notificações para que possamos te ajudar.",
+  "understood": "Entendido"
+}

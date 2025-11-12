@@ -5,10 +5,18 @@ class BatteryReceiver {
   static const platform = MethodChannel('com.apolos.ultima_gota.battery');
 
   static Future<void> startBatteryReceiver(int threshold) async {
-    await platform.invokeMethod('startReceiver', {'threshold': threshold});
+    try {
+      await platform.invokeMethod('startForegroundService', {'threshold': threshold});
+    } on PlatformException catch (e) {
+      // suppress
+    }
   }
 
   static Future<void> stopBatteryReceiver() async {
-    await platform.invokeMethod('stopReceiver');
+    try {
+      await platform.invokeMethod('stopForegroundService');
+    } on PlatformException catch (e) {
+      // suppress
+    }
   }
 }

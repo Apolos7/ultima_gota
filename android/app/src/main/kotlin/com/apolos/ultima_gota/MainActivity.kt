@@ -1,15 +1,12 @@
 package com.apolos.ultima_gota
 
 import android.content.Intent
-import android.content.IntentFilter
-import com.apolos.ultima_gota.broadcast.BatteryReceiver
+import com.apolos.ultima_gota.services.BatteryMonitorService
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
-
-    private var batteryReceiver: BatteryReceiver? = null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
@@ -17,14 +14,14 @@ class MainActivity : FlutterActivity() {
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.apolos.ultima_gota.battery")
             .setMethodCallHandler { call, result ->
                 when (call.method) {
-                    "startReceiver" -> {
-                        val threshold = call.argument<Int>("threshold") ?: 20
-                        registerBatteryReceiver(threshold)
+                    "startForegroundService" -> {
+                        val threshold = call.argument<Int>("threshold")
+                        startForegroundService(threshold)
                         result.success(null)
                     }
 
-                    "stopReceiver" -> {
-                        unregisterBatteryReceiver()
+                    "stopForegroundService" -> {
+                        stopForegroundService()
                         result.success(null)
                     }
                     else -> result.notImplemented()
@@ -32,20 +29,14 @@ class MainActivity : FlutterActivity() {
             }
     }
 
-    private fun registerBatteryReceiver(threshold: Int) {
-        if (batteryReceiver == null) {
-            batteryReceiver = BatteryReceiver()
-            val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
-            registerReceiver(batteryReceiver, filter)
-        }
-        batteryReceiver?.threshold = threshold
+    private fun startForegroundService(threshold: Int?) {
+        val intent = Intent(this, BatteryMonitorService::class.java)
+        intent.putExtra("threshold", threshold)
+        startService(intent)
     }
 
-    private fun unregisterBatteryReceiver() {
-        batteryReceiver?.let {
-            unregisterReceiver(it)
-            batteryReceiver = null
-        }
+    private fun stopForegroundService() {
+        val intent = Intent(this, BatteryMonitorService::class.java)
+        stopService(intent)
     }
-
 }

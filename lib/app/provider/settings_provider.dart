@@ -55,6 +55,8 @@ class SettingsProvider extends ChangeNotifier {
     threshold = savedThreshold;
     start = savedStart;
     end = savedEnd;
+
+    _verifyAlertState();
     notifyListeners();
   }
 
@@ -107,11 +109,7 @@ class SettingsProvider extends ChangeNotifier {
     await prefs.setString('start', '${start.hour},${start.minute}');
     await prefs.setString('end', '${end.hour},${end.minute}');
 
-    if (alarmEnabled) {
-      BatteryReceiver.startBatteryReceiver(threshold.toInt());
-    } else {
-      BatteryReceiver.stopBatteryReceiver();
-    }
+    _verifyAlertState();
 
     savedAlarmEnabled = alarmEnabled;
     savedQuietHoursEnabled = quietHoursEnabled;
@@ -119,5 +117,13 @@ class SettingsProvider extends ChangeNotifier {
     savedStart = start;
     savedEnd = end;
     notifyListeners();
+  }
+
+  void _verifyAlertState() {
+    if (alarmEnabled) {
+      BatteryReceiver.startBatteryReceiver(threshold.toInt());
+    } else {
+      BatteryReceiver.stopBatteryReceiver();
+    }
   }
 }
